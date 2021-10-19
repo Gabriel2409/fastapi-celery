@@ -1,7 +1,6 @@
+from app.routers import hello
 from celery import Celery
 from fastapi import FastAPI
-
-from app.routers import hello
 
 
 def create_app() -> FastAPI:

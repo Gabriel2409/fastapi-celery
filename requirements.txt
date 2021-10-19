@@ -1,5 +1,7 @@
+alembic==1.6.5
 celery==5.1.2
 fastapi==0.66.0
 flower==1.0.0
 redis==3.5.3
+SQLAlchemy==1.4.20
 uvicorn[standard]==0.14.0

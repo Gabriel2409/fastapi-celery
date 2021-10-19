@@ -44,3 +44,55 @@ task = AsyncResult('c4ecac49-d364-4593-a3c0-d06ca7d3949f')
 Monitor celery
 
 - launch flower: `celery -A app.main.celery flower --port=5555`
+
+## sql alchemy
+
+```python
+
+# database.py
+
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+from app.config import settings
+
+# https://fastapi.tiangolo.com/tutorial/sql-databases/#create-the-sqlalchemy-engine
+engine = create_engine(
+    settings.DATABASE_URL, connect_args=settings.DATABASE_CONNECT_DICT
+)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+```
+
+## alembic
+
+- `alembic init alembic`
+
+In the created env.py add :
+
+```python
+
+from app.main import create_app
+from app.config import settings
+from app.database import Base
+...
+
+config.set_main_option("sqlalchemy.url", str(settings.DATABASE_URL))
+fastapi_app = create_app()
+target_metadata = Base.metadata
+```
+
+- create empty sqlite3 :
+
+```python
+>>> from main import app
+>>> from project.database import Base, engine
+>>> Base.metadata.create_all(bind=engine)
+>>> exit()
+```
+
+- migrate db :
+  - `alembic revision --autogenerate`
+  - `alembic upgrade head`
