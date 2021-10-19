@@ -1,12 +1,21 @@
+from app.config import settings
 from app.routers import hello
 from app.users import users_router
-from celery import Celery
+from celery import current_app as current_celery_app
 from fastapi import FastAPI
+
+
+def create_celery():
+    celery_app = current_celery_app
+    celery_app.config_from_object(settings, namespace="CELERY")
+
+    return celery_app
 
 
 def create_app() -> FastAPI:
     """Creates application"""
     app = FastAPI()
+    app.celery_app = create_celery()
     app.include_router(users_router)
 
     app.include_router(hello.router)
@@ -16,15 +25,4 @@ def create_app() -> FastAPI:
 
 app = create_app()
 
-celery = Celery(
-    __name__, broker="redis://127.0.0.1:6379/0", backend="redis://127.0.0.1:6379/0"
-)
-
-
-@celery.task
-def divide(x, y):
-    """divide task celery"""
-    import time
-
-    time.sleep(5)
-    return x / y
+celery = app.celery_app

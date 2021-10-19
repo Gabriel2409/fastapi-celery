@@ -6,24 +6,24 @@ repos:
         name: black
         description: 'Black: The uncompromising Python code formatter'
         entry: black
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.9.2
-    hooks:
-      - id: flake8
-        name: flake8
-        description: 'Enforce style consistency'
+  # - repo: https://gitlab.com/pycqa/flake8
+  #   rev: 3.9.2
+  #   hooks:
+  #     - id: flake8
+  #       name: flake8
+  #       description: 'Enforce style consistency'
   - repo: https://github.com/timothycrosley/isort
     rev: 5.9.3
     hooks:
       - id: isort
         name: isort
         description: 'Sort your imports'
-  - repo: https://github.com/econchick/interrogate
-    rev: 1.5.0
-    hooks:
-      - id: interrogate
-        name: interrogate
-        description: 'Checks code base for missing docstrings'
+  # - repo: https://github.com/econchick/interrogate
+  #   rev: 1.5.0
+  #   hooks:
+  #     - id: interrogate
+  #       name: interrogate
+  #       description: 'Checks code base for missing docstrings'
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1 # Use the ref you want to point at
     hooks:
