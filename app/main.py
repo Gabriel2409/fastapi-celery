@@ -1,17 +1,22 @@
 from celery import Celery
 from fastapi import FastAPI
 
-app = FastAPI()
+from app.routers import hello
+
+
+def create_app() -> FastAPI:
+    """Creates application"""
+    app = FastAPI()
+    app.include_router(hello.router)
+
+    return app
+
+
+app = create_app()
 
 celery = Celery(
     __name__, broker="redis://127.0.0.1:6379/0", backend="redis://127.0.0.1:6379/0"
 )
-
-
-@app.get("/")
-async def root():
-    """Hello world"""
-    return {"message": "Hello World"}
 
 
 @celery.task
