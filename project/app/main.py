@@ -1,5 +1,5 @@
 from app.config import settings
-from app.routers import hello, users
+from app.routers import hello, math, users
 from celery import current_app as current_celery_app
 from fastapi import FastAPI
 
@@ -18,6 +18,7 @@ def create_app() -> FastAPI:
     app = FastAPI()
     app.celery_app = create_celery()
     app.include_router(users.router)
+    app.include_router(math.router)
 
     app.include_router(hello.router)
 
