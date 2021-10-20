@@ -9,7 +9,7 @@ config = context.config
 
 
 from app.config import settings
-from app.database import Base
+from app.database.models import Base
 from app.main import create_app
 
 # Interpret the config file for Python logging.
