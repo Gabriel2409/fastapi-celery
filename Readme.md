@@ -49,7 +49,7 @@ Monitor celery
 
 ```python
 
-# database.py
+# database/__init__.py
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
