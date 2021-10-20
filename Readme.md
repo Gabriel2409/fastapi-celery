@@ -76,7 +76,7 @@ In the created env.py add :
 
 from app.main import create_app
 from app.config import settings
-from app.database import Base
+from app.database.models import Base
 ...
 
 config.set_main_option("sqlalchemy.url", str(settings.DATABASE_URL))
