@@ -6,7 +6,6 @@
 ## celery
 
 ```python
-
 celery = Celery(
     __name__, broker="redis://127.0.0.1:6379/0", backend="redis://127.0.0.1:6379/0"
 )
@@ -21,6 +20,27 @@ def divide(x, y):
 ```
 
 - launch celery : `celery -A app.main.celery worker --loglevel=info`
+
+- launch celery so that it auto reloads on code change : `python watch_celery.py`
+```python
+# watch_celery.py
+
+from watchgod import run_process
+import subprocess
+
+def celery_worker():
+    def run_worker():
+        subprocess.call(
+            ["celery", "-A", "app.main.celery", "worker", "--loglevel=info"]
+        )
+
+    run_process("./", run_worker)
+
+
+if __name__ == "__main__":
+    celery_worker()
+```
+
 
 ```python
 from main import app, divide
