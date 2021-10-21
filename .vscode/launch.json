@@ -1,0 +1,30 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Python: FastAPI",
+			"type": "python",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/project",
+			"module": "uvicorn",
+			"args": ["app.main:app"],
+			"env": {
+				"broker_url": "redis://127.0.0.1:6379:6379/0",
+				"result_backend": "redis://127.0.0.1:6379:6379/0"
+			},
+			"jinja": true
+		},
+		{
+			"name": "Python: Celery",
+			"type": "python",
+			"request": "launch",
+			"module": "celery",
+			"cwd": "${workspaceFolder}/project",
+			"console": "integratedTerminal",
+			"args": ["-A", "app.main.celery", "worker", "-l", "info", "-P", "solo"]
+		}
+	]
+}
