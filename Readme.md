@@ -22,6 +22,7 @@ def divide(x, y):
 - launch celery : `celery -A app.main.celery worker --loglevel=info`
 
 - launch celery so that it auto reloads on code change : `python watch_celery.py`
+
 ```python
 # watch_celery.py
 
@@ -40,7 +41,6 @@ def celery_worker():
 if __name__ == "__main__":
     celery_worker()
 ```
-
 
 ```python
 from main import app, divide
@@ -116,3 +116,7 @@ target_metadata = Base.metadata
 - migrate db :
   - `alembic revision --autogenerate`
   - `alembic upgrade head`
+
+## Docker compose
+
+- Run `docker compose up -d --build`
